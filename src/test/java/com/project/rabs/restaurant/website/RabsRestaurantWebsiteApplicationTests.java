@@ -1,4 +1,4 @@
-package com.project.rabs_restaurant_website;
+package com.project.rabs.restaurant.website;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
