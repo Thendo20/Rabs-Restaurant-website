@@ -19,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Configuration
@@ -73,8 +74,12 @@ public class SecurityConfig {
             }
             @SuppressWarnings("unchecked")
             final List<String> roles = (List<String>) realmAccess.get("roles");
+            if (roles == null || roles.isEmpty()) {
+                return List.of();
+            }
 
             return roles.stream()
+                    .filter(Objects::nonNull)
                     .map(roleName -> "ROLE_" + roleName.toUpperCase())
                     .map(SimpleGrantedAuthority::new)
                     .collect(Collectors.toList());
