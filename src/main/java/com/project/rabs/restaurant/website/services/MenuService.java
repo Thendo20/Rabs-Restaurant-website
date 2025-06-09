@@ -1,7 +1,9 @@
 package com.project.rabs.restaurant.website.services;
 
 import com.project.rabs.restaurant.website.entity.Menu;
-import com.project.rabs.restaurant.website.exception.MenuServiceException;
+import com.project.rabs.restaurant.website.exceptions.DuplicateMenuItemException;
+import com.project.rabs.restaurant.website.exceptions.MenuItemNotFoundException;
+import com.project.rabs.restaurant.website.exceptions.MenuServiceException;
 import com.project.rabs.restaurant.website.repository.MenuRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,28 +25,26 @@ public class MenuService {
         menuRepository.findAll().forEach(list::add);
 
         if (list.isEmpty()) {
-            throw new MenuServiceException("There are no menu items in the database");
+            throw new MenuItemNotFoundException("There are no menu items in the database");
         }
         return list;
     }
 
     public Menu findById(Long id) {
         Optional<Menu> foundMenuItem = menuRepository.findByItemId(id);
-        return foundMenuItem.orElseThrow(() -> new MenuServiceException("Menu Item not found"));
+        return foundMenuItem.orElseThrow(() -> new MenuItemNotFoundException("Menu Item not found"));
     }
 
     public Menu findByName(String name) {
         Optional<Menu> foundMenuItem = menuRepository.findByItemName(name);
-        return foundMenuItem.orElseThrow(() -> new MenuServiceException("Menu Item not found"));
+        return foundMenuItem.orElseThrow(() -> new MenuItemNotFoundException("Menu Item not found"));
     }
-
-
 
     public void deleteMenuItem(String name) {
         if (menuRepository.existsByItemName(name)) {
             menuRepository.deleteByItemName(name);
         } else {
-            throw new MenuServiceException("Menu Item not found to delete");
+            throw new MenuItemNotFoundException("Menu Item not found to delete");
         }
 
     }
@@ -69,7 +69,7 @@ public class MenuService {
             menuItem.setStockCount(menuItem.getStockCount() - quantity);
             menuRepository.save(menuItem);
         } else {
-            throw new MenuServiceException("Menu Item not found");
+            throw new MenuItemNotFoundException("Menu Item not found");
         }
     }
 
@@ -87,13 +87,13 @@ public class MenuService {
         }
     }
 
-    public void addMenuItem(Menu newMenuItem) {
+    public Menu addMenuItem(Menu newMenuItem) {
         validateMenuItem(newMenuItem);
 
         if (!menuRepository.existsByItemName(newMenuItem.getItemName())) {
-            menuRepository.save(newMenuItem);
+            return menuRepository.save(newMenuItem);
         } else {
-            throw new MenuServiceException("Menu Item already exists");
+            throw new DuplicateMenuItemException("Menu Item already exists");
         }
 
     }
@@ -118,7 +118,6 @@ public class MenuService {
 
             return Optional.of(menuRepository.save(menuItem));
         }
-
         return Optional.empty();
     }
 

@@ -1,0 +1,7 @@
+package com.project.rabs.restaurant.website.exceptions;
+
+public class MenuItemNotFoundException extends RuntimeException {
+    public MenuItemNotFoundException(String message) {
+        super(message);
+    }
+}

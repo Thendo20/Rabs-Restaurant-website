@@ -1,7 +1,9 @@
 package com.project.rabs.restaurant.website.services;
 
 import com.project.rabs.restaurant.website.entity.Menu;
-import com.project.rabs.restaurant.website.exception.MenuServiceException;
+import com.project.rabs.restaurant.website.exceptions.DuplicateMenuItemException;
+import com.project.rabs.restaurant.website.exceptions.MenuItemNotFoundException;
+import com.project.rabs.restaurant.website.exceptions.MenuServiceException;
 import com.project.rabs.restaurant.website.repository.MenuRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -76,7 +78,7 @@ public class MenuServiceTest {
 
         when(menuRepository.findByItemId(defaultMenuItem.getItemId())).thenReturn(Optional.empty());
         assertThatThrownBy(() -> menuService.findById(defaultMenuItem.getItemId()))
-                .isInstanceOf(MenuServiceException.class)
+                .isInstanceOf(MenuItemNotFoundException.class)
                 .hasMessage("Menu Item not found");
     }
 
@@ -88,7 +90,7 @@ public class MenuServiceTest {
 
         when(menuRepository.findByItemName("Pap")).thenReturn(Optional.empty());
         assertThatThrownBy(() -> menuService.findByName("Pap"))
-                .isInstanceOf(MenuServiceException.class)
+                .isInstanceOf(MenuItemNotFoundException.class)
                 .hasMessage("Menu Item not found");
     }
 
@@ -100,7 +102,7 @@ public class MenuServiceTest {
 
         when(menuRepository.existsByItemName(defaultMenuItem.getItemName())).thenReturn(true);
         assertThatThrownBy(() -> menuService.addMenuItem(defaultMenuItem))
-                .isInstanceOf(MenuServiceException.class)
+                .isInstanceOf(DuplicateMenuItemException.class)
                 .hasMessage("Menu Item already exists");
     }
 
@@ -112,7 +114,7 @@ public class MenuServiceTest {
 
         when(menuRepository.existsByItemName(defaultMenuItem.getItemName())).thenReturn(false);
         assertThatThrownBy(() -> menuService.deleteMenuItem(defaultMenuItem.getItemName()))
-                .isInstanceOf(MenuServiceException.class)
+                .isInstanceOf(MenuItemNotFoundException.class)
                 .hasMessage("Menu Item not found to delete");
     }
 
@@ -134,18 +136,18 @@ public class MenuServiceTest {
 
         when(menuRepository.findByItemName("Pap and Gravy")).thenReturn(Optional.empty());
         assertThatThrownBy(() -> menuService.decreaseStock(defaultMenuItem.getItemName(), -5))
-                .isInstanceOf(MenuServiceException.class)
+                .isInstanceOf(MenuItemNotFoundException.class)
                 .hasMessage("Menu Item not found");
     }
 
     @Test
     void shouldUpdateMenuItemAndReturn() {
-        Menu updateMenuItem = createSampleMenuItem(1L, "Pap and Gravy", 30.00, 5);
+        Menu menuItem = createSampleMenuItem(1L, "Pap and Gravy", 30.00, 5);
 
         when(menuRepository.findByItemId(1L)).thenReturn(Optional.of(defaultMenuItem));
         when(menuRepository.save(any(Menu.class))).thenReturn(defaultMenuItem);
 
-        Optional<Menu> updatedMenuItem = menuService.updateMenuItem(updateMenuItem);
+        Optional<Menu> updatedMenuItem = menuService.updateMenuItem(menuItem);
 
         assertThat(updatedMenuItem.isPresent()).isTrue();
         verify(menuRepository).findByItemId(1L);

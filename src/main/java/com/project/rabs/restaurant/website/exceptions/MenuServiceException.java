@@ -1,4 +1,4 @@
-package com.project.rabs.restaurant.website.exception;
+package com.project.rabs.restaurant.website.exceptions;
 
 public class MenuServiceException extends RuntimeException {
     public MenuServiceException(String message) {
