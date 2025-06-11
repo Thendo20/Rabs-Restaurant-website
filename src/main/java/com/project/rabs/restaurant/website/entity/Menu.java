@@ -8,8 +8,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "menu")
 public class Menu {
     @Id
-    private String itemId;
+    private Long itemId;
     private String itemName;
     private double price;
-    private int stockCount;
+    private String description;
+    private Long stockCount;
 }

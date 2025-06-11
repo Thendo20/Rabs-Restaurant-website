@@ -1,4 +1,4 @@
-package com.project.rabs.restaurant.website.controllers;
+package com.project.rabs.restaurant.website.web;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
