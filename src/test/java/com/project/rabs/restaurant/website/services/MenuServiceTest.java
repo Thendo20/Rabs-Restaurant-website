@@ -32,7 +32,7 @@ public class MenuServiceTest {
     private MenuService menuService;
     private AutoCloseable autoCloseable;
 
-    private Menu createSampleMenuItem(Long id, String name, Double price, int stockCount) {
+    private Menu createSampleMenuItem(Long id, String name, Double price, Long stockCount) {
         Menu menuItem = new Menu();
         menuItem.setItemId(id);
         menuItem.setItemName(name);
@@ -46,7 +46,7 @@ public class MenuServiceTest {
     void init() {
         autoCloseable = MockitoAnnotations.openMocks(this);
         menuService = new MenuService(menuRepository);
-        defaultMenuItem = createSampleMenuItem(1L, "Pap and Gravy", 50.00, 10 );
+        defaultMenuItem = createSampleMenuItem(1L, "Pap and Gravy", 50.00, 10L );
     }
 
     @AfterEach
@@ -56,8 +56,8 @@ public class MenuServiceTest {
 
     @Test
     void returnAllMenuItems() {
-        Menu meniItem2 = createSampleMenuItem(2L, "Pap and Chicken", 60.00, 5);
-        Menu menuItem3 = createSampleMenuItem(3L, "Pap and Boerewors", 80.00, 20);
+        Menu meniItem2 = createSampleMenuItem(2L, "Pap and Chicken", 60.00, 5L);
+        Menu menuItem3 = createSampleMenuItem(3L, "Pap and Boerewors", 80.00, 20L);
 
         List<Menu> menuItems = List.of(defaultMenuItem, meniItem2, menuItem3);
         when(menuRepository.findAll()).thenReturn(menuItems);
@@ -142,7 +142,7 @@ public class MenuServiceTest {
 
     @Test
     void shouldUpdateMenuItemAndReturn() {
-        Menu menuItem = createSampleMenuItem(1L, "Pap and Gravy", 30.00, 5);
+        Menu menuItem = createSampleMenuItem(1L, "Pap and Gravy", 30.00, 5L);
 
         when(menuRepository.findByItemId(1L)).thenReturn(Optional.of(defaultMenuItem));
         when(menuRepository.save(any(Menu.class))).thenReturn(defaultMenuItem);

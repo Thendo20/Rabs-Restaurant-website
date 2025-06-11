@@ -11,5 +11,6 @@ public class Menu {
     private Long itemId;
     private String itemName;
     private double price;
-    private int stockCount;
+    private String description;
+    private Long stockCount;
 }

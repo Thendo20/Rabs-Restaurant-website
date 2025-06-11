@@ -16,7 +16,7 @@ import java.util.List;
 
 @Tag(name = "Public controller", description = "Publicly available apis")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/public")
 public class PublicController {
     private final MenuService menuService;
 
@@ -34,7 +34,7 @@ public class PublicController {
         return ResponseEntity.ok().body(menuItems);
     }
 
-    @GetMapping("/item/{id}")
+    @GetMapping("/item/id/{id}")
     @Operation(summary = "find menu item using ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "menu item returned successfully")
@@ -44,7 +44,7 @@ public class PublicController {
         return ResponseEntity.ok().body(menu);
     }
 
-    @GetMapping("/item/{name}")
+    @GetMapping("/item/name/{name}")
     @Operation(summary = "find menu item using name")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "menu item returned successfully")

@@ -40,7 +40,7 @@ public class AdminController {
         return ResponseEntity.created(location).body(menuItemCreated);
     }
 
-    @PutMapping("/{name}")
+    @PutMapping("/update/{name}")
     @Operation(summary = "Update existing menu item")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Menu item updated successfully")

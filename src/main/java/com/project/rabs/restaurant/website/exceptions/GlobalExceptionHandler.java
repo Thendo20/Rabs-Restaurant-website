@@ -43,10 +43,4 @@ public class GlobalExceptionHandler {
         return new ErrorResponse("INVALID_ARGUMENT", e.getMessage());
     }
 
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handleInternalServerError(Exception e) {
-        logger.warn("Internal server error {}", e.getMessage(), e);
-        return new ErrorResponse("INTERNAL_SERVER_ERROR", e.getMessage());
-    }
 }
