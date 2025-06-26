@@ -1,0 +1,48 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a routerLink="/" class="brand-link">
+        Rabali's Restaurant
+      </a>
+    </div>
+
+<!--    Desktop Menu-->
+    <ul class="nav-menu" [class.active]="isMenuOpen()">
+      <li class="nav-item">
+        <a routerLink="/home"
+           routerLinkActive="active"
+           class="nav-link">About Us
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/menu"
+           routerLinkActive="active"
+           class="nav-link">Menu
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/contact"
+           routerLinkActive="active"
+           class="nav-link">Order
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink = "/join"
+           routerLinkActive="active"
+           class="nav-link">Join Us
+        </a>
+      </li>
+    </ul>
+
+    <!-- Mobile Hamburger -->
+    <div class="hamburger"
+         [class.active]="isMenuOpen()"
+         (click)="toggleMenu()">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+  </div>
+</nav>
+
+

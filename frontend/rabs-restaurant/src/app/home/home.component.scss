@@ -1,0 +1,100 @@
+@import '../../styles/variables.scss';
+
+.hero-section {
+  height: 100vh;
+  display: flex;
+  background: linear-gradient(135deg, $primary-black 0%, $charcoal 100%) center;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  text-align: center;
+  color: $pure-white;
+  z-index: 2;
+  max-width: 800px;
+  padding: 0 2rem;
+
+  h1 {
+    font-family: $font-heading;
+    font-size: clamp(2.5rem, 5vw, 4rem); //Responsive font size
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02rem;
+
+    //Subtle animation on load
+    animation: fadeInUp 1s ease-out;
+  }
+  p {
+    font-family: $font-heading;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    line-height: 1.6;
+
+    animation: fadeInUp 1s ease-out 0.3s both;
+  }
+}
+
+.hero-buttons {
+  display: inline-flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.btn-primary {
+  background: $pure-white;
+  color: $primary-black;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: $light-gray;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    padding: 0 1rem;
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+
+    .btn-primary, .btn-secondary {
+      width: 200px;
+    }
+  }
+}
