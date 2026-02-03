@@ -1,0 +1,209 @@
+@import '../../../styles/variables.scss';
+
+// Desktop styling
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  //background: linear-gradient(135deg, maroon 0%, $pure-white 100%);
+  background: ghostwhite;
+  border-bottom: 1px solid rgba($pure-white, 0.1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    //background: linear-gradient(90deg,
+    //  rgba($primary-black, 0.9) 0%,
+    //  rgba($charcoal, 0.95) 50%,
+    //  rgba($primary-black, 0.9) 100%);
+    z-index: -1;
+  }
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+}
+
+.nav-brand {
+  flex-shrink: 0;
+
+  .brand-link {
+    font-family: $font-heading;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: $primary-black;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: $charcoal;
+    }
+  }
+  .logo {
+    height: 40px;
+    width: auto;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+  .span {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  gap: 2rem;
+
+  .nav-item {
+    position: relative;
+
+    .nav-link {
+      color: $primary-black;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.5rem 0;
+      transition: all 0.3s ease;
+      position: relative;
+
+      // Underline animation
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: $primary-black;
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+
+        &::after {
+          width: 100%;
+        }
+      }
+
+      // Active link styling
+      &.active-link {
+        color: $accent-gold;
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+}
+
+// Mobile styling
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+
+  .bar {
+    width: 25px;
+    height: 3px;
+    background: $primary-black;
+    margin: 3px 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+
+  // Hamburger animation to X
+  &.active {
+    .bar:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 8px);
+    }
+
+    .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .bar:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -8px);
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .nav-container {
+    padding: 0 1rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 80px;                        // Position below the navbar
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px);       // Full height minus navbar
+    background: ghostwhite;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 3rem;
+    gap: 2rem;
+
+    // Hidden by default - moved off-screen and invisible
+    opacity: 0;
+    pointer-events: none;             // Prevent clicks when hidden
+    transform: translateX(100%);      // Slide in from right
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+    &.active {
+      opacity: 1;
+      pointer-events: auto;           // Allow clicks when visible
+      transform: translateX(0);       // Slide into view
+    }
+
+    .nav-item {
+      .nav-link {
+        font-size: 1.2rem;
+        padding: 1rem 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .nav-container {
+    height: 70px;
+  }
+
+  .nav-brand .brand-link {
+    font-size: 1rem;
+  }
+
+  .nav-menu {
+    top: 70px;
+    height: calc(100vh - 70px);
+  }
+}

@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'styles/variables';html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  //background: linear-gradient(135deg, $pure-white 0%, $charcoal 100%) center;
+}
+
+// Optional: Style your main or content section if needed
+main {
+  display: flex; // If you want main to also participate in flex layout
+  flex-direction: column;
+  min-height: calc(100vh - 80px); // Ensure main also takes up remaining height
+}
+
+// If you want the 'content' section to fill the remaining space within 'main'
+.content {
+  flex-grow: 1; // Allows it to take up available space
+  min-height: 100%; // Ensure it fills its parent's height (which is adjusted by main)
+}
