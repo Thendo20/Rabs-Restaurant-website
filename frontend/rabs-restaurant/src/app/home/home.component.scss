@@ -1,18 +1,23 @@
 @import '../../styles/variables.scss';
 
 .hero-section {
-  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
   display: flex;
-  background: linear-gradient(135deg, $primary-black 0%, $charcoal 100%) center;
+  //background-image: url('/assets/images/img6.jpg');
+  //background-size: cover;
+  //background-position: center;
+  //background-repeat: no-repeat;
+  background: ghostwhite;
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  //overflow: hidden;
 }
 
 .hero-content {
   text-align: center;
-  color: $pure-white;
+  color: $primary-black;
   z-index: 2;
   max-width: 800px;
   padding: 0 2rem;
@@ -47,8 +52,8 @@
 }
 
 .btn-primary {
-  background: $pure-white;
-  color: $primary-black;
+  background: $primary-black;
+  color: $pure-white;
   padding: 1rem 2rem;
   border: none;
   border-radius: 0;
@@ -57,9 +62,10 @@
   letter-spacing: 0.5px;
   transition: all 0.3s ease;
   cursor: pointer;
+  text-decoration: none;    // Remove underline for anchor tags
+  display: inline-block;    // Ensure padding works on anchor tags
 
   &:hover {
-    background: $light-gray;
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   }

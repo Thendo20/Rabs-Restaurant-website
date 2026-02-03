@@ -1,0 +1,69 @@
+<menu class ='menu-section'>
+
+  <div class="menu-header">
+    <h1 class="menu-title">Our Menu</h1>
+  </div>
+<!--  Loading State-->
+  @if( isLoading() ) {
+  <div class="loading-state">
+
+    <div class="loading-spinner"></div>
+    <p>Loading menu</p>
+
+  </div>
+    }
+<!--  Error State-->
+  @if(error() && !isLoading()) {
+  <div class="error-state">
+    <div class="error-icon">⚠️</div>
+    <p class="error-message">{{ error() }}</p>
+    <button class="retry-btn" (click)="retryLoad()">Try Again</button>
+  </div>
+  }
+
+<!--  Menu Items-->
+  @if (!error() && !isLoading()) {
+  <div class="menu-carousel">
+    <div class="carousel-container">
+      <button class="carousel-btn prev btn" (click)="previousMenuItem()">
+        &#8592;
+      </button>
+
+      <div class="carousel-content">
+        <div class="menu-item">
+          <img ngSrc="/assets/images/img8.jpg"
+               [alt]=currentMenuItem().itemName
+               height="300" width="960">
+
+          <div class="menu-item-info">
+            <div class="menu-item-header">
+              <h3 class="item-name">{{ currentMenuItem().itemName }}</h3>
+            </div>
+
+            <p class="item-description">{{ currentMenuItem().description }}</p>
+
+            <div class="item-footer">
+              <span class="item-price">{{ formatPrice(currentMenuItem().price) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-btn next btn" (click)="nextMenuItem()">
+        &#8594;
+      </button>
+    </div>
+
+  </div>
+
+    <div class="full-menu-cta">
+      <div class="menu-buttons">
+        <button class="view-menu-btn" (click)="openMenu()">View Menu</button>
+        <button class="view-menu-btn" (click)="openAltMenu()">View Alt Menu</button>
+      </div>
+      <div class="menu-food-image">
+        <img src="/assets/images/img6.jpg" alt="Appetizing food from RAB'S Restaurant">
+      </div>
+    </div>
+  }
+</menu>

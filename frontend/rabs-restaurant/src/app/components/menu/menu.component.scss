@@ -1,0 +1,304 @@
+@import '../../../styles/variables.scss';
+
+.menu-section {
+  min-height: 100svh;
+  background: $ghost-white;
+  //background-image: url('/assets/images/img6.jpg');
+  //background-size: cover;
+  //background-position: center;
+  //background-repeat: no-repeat;
+  padding: 6rem 2rem 4rem;
+
+  @media (max-width: 768px) {
+    padding: 5rem 1rem 3rem
+  }
+}
+.menu-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+
+  .menu-title {
+  font-family: $font-heading;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: $primary-black;
+  font-weight: 700;
+  letter-spacing: -0.02rem;
+  }
+}
+
+
+.loading-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: $charcoal;
+
+  .loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid $light-gray;
+    border-top: 4px solid $primary-black;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    opacity: 0.7
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: $charcoal;
+
+  .error-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .error-message {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.8;
+  }
+
+  .retry-btn {
+    background-color: $primary-black;
+    color: $ghost-white;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: $charcoal;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.menu-carousel {
+  background-color: $charcoal;
+  padding: 2rem 0;
+  max-width: 100%;
+  margin: 0 auto;
+
+}
+
+.carousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.carousel-content {
+  flex: 1;
+  max-width: 500px;
+}
+
+.menu-item {
+  text-align: center;
+  background: linear-gradient($primary-black 0%, $charcoal);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.menu-item:hover {
+  transform: translateY(-2px);
+}
+
+.menu-item img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.menu-item-text {
+  flex: 1;
+}
+.menu-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+
+  .item-name {
+    font-family: $font-heading;
+    font-size: 1.3rem;
+    color: $ghost-white;
+    font-weight: 600;
+    margin: 0;
+    flex: 1;
+  }
+}
+
+.item-description {
+  color: $ghost-white;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .item-price {
+    font-family: $font-heading;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: $ghost-white;
+  }
+}
+
+.carousel-btn {
+  background: $primary-black;
+  color: $ghost-white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color .2s ease;
+  margin: 0 1rem;
+
+  &:hover {
+    background: rgba(44, 85, 48, 1);
+    transform: scale(1.1);
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+// ---------- Full Menu CTA Section ----------
+// This is a vertical (column) flex container that stacks
+// the buttons on top and the food image below.
+.full-menu-cta {
+  display: flex;
+  flex-direction: column;   // Stack children vertically
+  align-items: center;      // Center children horizontally
+  margin-top: 3rem;
+  gap: 2rem;                // Space between buttons and image
+}
+
+// The row of buttons. We use flexbox with `row` direction
+// so the two buttons sit side-by-side.
+.menu-buttons {
+  display: flex;
+  gap: 1.5rem;              // Horizontal space between the two buttons
+  flex-wrap: wrap;           // On small screens, buttons wrap to next line
+  justify-content: center;  // Keep them centered when they wrap
+}
+
+// Individual button styling
+.view-menu-btn {
+  background: $primary-black;
+  color: $ghost-white;
+  border: none;
+  padding: 1rem 2.5rem;
+  font-family: $font-heading;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background: $charcoal;
+    transform: translateY(-3px);
+  }
+}
+
+// The food image container. We constrain its max-width so it
+// doesn't stretch edge-to-edge on large monitors.
+.menu-food-image {
+  width: 100%;
+  max-width: 800px;         // Cap the width for readability
+
+  img {
+    width: 100%;            // Fill the container width
+    height: auto;           // Maintain aspect ratio
+    display: block;         // Remove inline gap beneath img
+    border-radius: 8px;
+    object-fit: cover;      // Crop nicely if aspect ratio differs
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
+  }
+
+  .featured-item img {
+    height: 250px;
+  }
+
+  .item-info {
+    padding: 1rem;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .menu-item-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  // On small screens, position arrows over the carousel image
+  .carousel-container {
+    position: relative;      // Needed for absolute positioning of children
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    // Position left/right arrows using the actual class names from HTML
+    &.prev {
+      left: 10px;
+    }
+
+    &.next {
+      right: 10px;
+    }
+  }
+}
